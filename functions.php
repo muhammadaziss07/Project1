@@ -7,7 +7,7 @@ function showAllUserId(){
 	$query = "SELECT * FROM users";
 	$result = mysqli_query($koneksi, $query);
 	
-	ir(!$result){
+	if(!$result){
 		die('Query Failed' . mysqli_error($koneksi));
 	}
 	
