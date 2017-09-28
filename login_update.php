@@ -1,3 +1,16 @@
+<?php
+
+include "db.php";
+
+$query = "SELECT * FROM users";
+$result = mysqli_query($koneksi, $query);
+
+if(!$result){
+	die('Query Failed' . mysqli_error($koneksi));
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +21,7 @@
 
 <div class="container">
 	<div class="col-md-6">
-		<form action="login_create.php" method="post">
+		<form action="login_create.php" method="post",>
 			<div class="form-group">
 				<label for="username">Username</label>
 				<input type="text" name="username" class="form-control">
@@ -19,7 +32,12 @@
 			</div>
 			<div class="form-group">
 				<select name="id" class="form-control">
-					<option value="1">1</option>
+					<?php
+					while($row = mysqli_fetch_assoc($result)){
+						$id = $row['id'];
+						echo "<option value='$id'>$id</option>";
+					}
+					?>
 				</select>
 			</div>
 			<input type="submit" name="submit" value="Submit" class="btn btn-primary" />
